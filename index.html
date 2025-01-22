@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,9 @@
         }
     </style>
 </head>
-<body> 
+<body>
+    <h1>Redirecționare în curs...</h1>
+    <p>Te vom redirecționa către linkul tău în scurt timp.</p>
 
     <script>
         // Verificăm dacă obiectul Telegram.WebApp există
@@ -28,11 +30,16 @@
 
             // Redirecționăm utilizatorul către linkul tău
             // Înlocuiește 'TĂU_LINK_AICI' cu linkul tău real
-            setTimeout(() => {
-                window.location.href = 'https://1wlmhc.com/?p=4aou';
-            }, 0000); // Așteaptă 2 secunde înainte de redirect
+            var redirectLink = 'google.com';
+            
+            // Așteptăm până ce Web App-ul este gata înainte de a face redirect
+            window.Telegram.WebApp.onEvent('ready', function() {
+                window.location.href = redirectLink;
+            });
         } else {
             console.error("Obiectul Telegram.WebApp nu este disponibil.");
+            // Dacă Telegram.WebApp nu este disponibil, facem redirect direct
+            window.location.href = 'google.com';
         }
     </script>
 </body>
