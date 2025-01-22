@@ -30,7 +30,7 @@
 
             // Redirecționăm utilizatorul către linkul tău
             // Înlocuiește 'TĂU_LINK_AICI' cu linkul tău real
-            var redirectLink = 'google.com';
+            var redirectLink = 'https://google.com';
             
             // Așteptăm până ce Web App-ul este gata înainte de a face redirect
             window.Telegram.WebApp.onEvent('ready', function() {
@@ -39,7 +39,7 @@
         } else {
             console.error("Obiectul Telegram.WebApp nu este disponibil.");
             // Dacă Telegram.WebApp nu este disponibil, facem redirect direct
-            window.location.href = 'google.com';
+            window.location.href = 'https://google.com';
         }
     </script>
 </body>
