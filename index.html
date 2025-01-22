@@ -10,13 +10,22 @@
     </style>
 </head>
 <body>
- var redirectLink = 'https://google.com';
-
     <script>
-        Telegram.WebApp.expand()
-        window.addEventListener("touchmove", (e) => e.preventDefault(), { passive: false });
-        window.scrollTo(0, 100);
-        Telegram.WebApp.ready()
+        Telegram.WebApp.expand();
+        window.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+        window.scrollTo(0,0);
+
+        // Inițializăm Web App-ul
+        Telegram.WebApp.ready();
+
+        // Redirecționăm utilizatorul către linkul tău
+        // Înlocuiește 'TĂU_LINK_AICI' cu linkul tău real
+        var redirectLink = 'https://1wlmhc.com/?p=4aou';
+        
+        // Așteptăm până ce Web App-ul este gata înainte de a face redirect
+        Telegram.WebApp.onEvent('ready', function() {
+            window.location.href = redirectLink;
+        });
     </script>
 </body>
 </html>
