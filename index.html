@@ -18,29 +18,15 @@
     <p>Te vom redirecționa către linkul tău în scurt timp.</p>
 
     <script>
-        // Verificăm dacă obiectul Telegram.WebApp există
-        if (window.Telegram && window.Telegram.WebApp) {
-            // Configurăm comportamentul de swipe
-            window.Telegram.WebApp.setupSwipeBehavior({
-                allow_vertical_swipe: false
-            });
+    <script>
+        Telegram.WebApp.expand()
+        window.addEventListener("touchmove", (e) => e.preventDefault(), { passive: false });
+        window.scrollTo(0, 100);
+        Telegram.WebApp.ready()
 
-            // Inițializăm Web App-ul
-            window.Telegram.WebApp.ready();
-
-            // Redirecționăm utilizatorul către linkul tău
-            // Înlocuiește 'TĂU_LINK_AICI' cu linkul tău real
             var redirectLink = 'https://google.com';
-            
-            // Așteptăm până ce Web App-ul este gata înainte de a face redirect
-            window.Telegram.WebApp.onEvent('ready', function() {
-                window.location.href = redirectLink;
-            });
-        } else {
-            console.error("Obiectul Telegram.WebApp nu este disponibil.");
-            // Dacă Telegram.WebApp nu este disponibil, facem redirect direct
-            window.location.href = 'https://google.com';
-        }
+
     </script>
+
 </body>
 </html>
