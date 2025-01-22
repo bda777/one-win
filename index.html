@@ -1,31 +1,22 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirect cu Swipe Down</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            text-align: center;
-            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
-    <h1>Redirecționare în curs...</h1>
-    <p>Te vom redirecționa către linkul tău în scurt timp.</p>
+ var redirectLink = 'https://google.com';
 
     <script>
         Telegram.WebApp.expand()
         window.addEventListener("touchmove", (e) => e.preventDefault(), { passive: false });
         window.scrollTo(0, 100);
         Telegram.WebApp.ready()
-
-            var redirectLink = 'https://google.com';
-
     </script>
-
 </body>
 </html>
