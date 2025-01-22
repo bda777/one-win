@@ -1,31 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Referral Redirect</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            if (window.Telegram && window.Telegram.WebApp) {
-                const tg = window.Telegram.WebApp;
-
-                // Dezactivează swipe down prin extinderea aplicației
-                tg.expand();
-                tg.ready();
-            }
-
-            // Redirecționează utilizatorul către referral link
-            const referralLink = "https://1wlmhc.com/?p=4aou"; // Schimbă cu link-ul tău
-            window.location.href = referralLink;
-<script>      if (window.Telegram && window.Telegram.WebApp) {             // Configurăm comportamentul de swipe             
-window.Telegram.WebApp.setupSwipeBehavior({                 allow_vertical_swipe: true             });              
-window.Telegram.WebApp.ready();         } else {             console.error("Obiectul Telegram.WebApp nu este disponibil.");         }     </script> 
-
-
-
-        });
-    </script>
+    <title>Redirect cu Swipe Down</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
+    <h1>Redirecționare în curs...</h1>
+    <p>Te vom redirecționa către linkul tău în scurt timp.</p>
+
+    <script>
+        // Verificăm dacă obiectul Telegram.WebApp există
+        if (window.Telegram && window.Telegram.WebApp) {
+            // Configurăm comportamentul de swipe
+            window.Telegram.WebApp.setupSwipeBehavior({
+                allow_vertical_swipe: true
+            });
+
+            // Inițializăm Web App-ul
+            window.Telegram.WebApp.ready();
+
+            // Redirecționăm utilizatorul către linkul tău
+            // Înlocuiește 'TĂU_LINK_AICI' cu linkul tău real
+            setTimeout(() => {
+                window.location.href = 'TĂU_LINK_AICI';
+            }, 2000); // Așteaptă 2 secunde înainte de redirect
+        } else {
+            console.error("Obiectul Telegram.WebApp nu este disponibil.");
+        }
+    </script>
 </body>
 </html>
