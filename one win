@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Referral Redirect</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.Telegram && window.Telegram.WebApp) {
+                const tg = window.Telegram.WebApp;
+
+                // Dezactivează swipe down prin extinderea aplicației
+                tg.expand();
+                tg.ready();
+            }
+
+            // Redirecționează utilizatorul către referral link
+            const referralLink = "https://referral-linkul-tau.com"; // Schimbă cu link-ul tău
+            window.location.href = referralLink;
+        });
+    </script>
+</head>
+<body>
+    <h1>Se redirecționează...</h1>
+</body>
+</html>
