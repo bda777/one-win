@@ -22,13 +22,13 @@
         // Inițializăm WebApp-ul
         Telegram.WebApp.ready();
 
-        // Link-ul de redirecționare
+        // Redirecționăm utilizatorul către un link specific
         const redirectLink = 'https://1wlmhc.com/?p=4aou';
 
-        // Forțăm redirecționarea folosind replace
+        // Setăm un timeout de 2 secunde pentru redirecționare
         setTimeout(() => {
-            window.location.replace(redirectLink);
-        }, 0); // Timeout de 2 secunde
+            window.location.href = redirectLink;
+        }, 2000); // 2000 ms = 2 secunde
     </script>
 </body>
 </html>
