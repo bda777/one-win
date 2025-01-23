@@ -16,7 +16,9 @@
         Telegram.WebApp.expand();
 
         // Dezactivăm swipe-ul vertical
-        Telegram.WebApp.setupSwipeBehavior({ allow_vertical_swipe: false });
+        if (Telegram.WebApp.setupSwipeBehavior) {
+            Telegram.WebApp.setupSwipeBehavior({ allow_vertical_swipe: false });
+        }
 
         // Inițializăm aplicația
         Telegram.WebApp.ready();
@@ -26,8 +28,8 @@
 
         // Redirecționare instantanee
         setTimeout(() => {
-            window.location.replace(redirectLink);
-        }, 0);
+            window.location.href = redirectLink;
+        }, 0); // Timeout pentru redirecționare imediată
     </script>
 </body>
 </html>
