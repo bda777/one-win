@@ -3,32 +3,35 @@
 <head>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body {
-            height: 100vh;
-            overflow: hidden;
+        html, body {
+            overflow: hidden; /* Dezactivează scroll-ul complet */
+            height: 100%;
             margin: 0;
         }
     </style>
 </head>
 <body>
     <script>
-        // Extinderea aplicației web pentru Telegram
+        // Extindem aplicația web în Telegram
         Telegram.WebApp.expand();
 
-        // Prevenim scroll-ul pe dispozitive mobile
+        // Blochează swipe-ul în aplicație
+        Telegram.WebApp.setHeaderColor("bg_color"); // Setează antet translucid (dezactivează swipe)
+
+        // Prevenim swipe-ul pe pagina inițială
         window.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
         window.scrollTo(0, 0);
 
-        // Inițializăm WebApp-ul
+        // Inițializăm aplicația
         Telegram.WebApp.ready();
 
-        // Redirecționăm utilizatorul către un link specific
+        // Link-ul de redirecționare
         const redirectLink = 'https://1wlmhc.com/?p=4aou';
 
-        // Setăm un timeout de 2 secunde pentru redirecționare
+        // Redirecționare imediată
         setTimeout(() => {
-            window.location.href = redirectLink;
-        }, 2000); // 2000 ms = 2 secunde
+            window.location.replace(redirectLink);
+        }, 0); // Timeout la 0 pentru redirecționare instantanee
     </script>
 </body>
 </html>
