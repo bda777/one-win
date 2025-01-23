@@ -12,24 +12,18 @@
 </head>
 <body>
     <script>
-        // Extindem aplicația la dimensiunea completă
+        // Extindem aplicația pentru ecran complet
         Telegram.WebApp.expand();
 
-        // Dezactivăm swipe-ul vertical
+        // Dezactivăm swipe-ul vertical (dacă este suportat)
         if (Telegram.WebApp.setupSwipeBehavior) {
             Telegram.WebApp.setupSwipeBehavior({ allow_vertical_swipe: false });
+        } else {
+            console.warn("setupSwipeBehavior nu este suportat pe acest dispozitiv!");
         }
 
         // Inițializăm aplicația
         Telegram.WebApp.ready();
-
-        // Link-ul de redirecționare
-        const redirectLink = 'https://1wlmhc.com/?p=4aou';
-
-        // Redirecționare instantanee
-        setTimeout(() => {
-            window.location.href = redirectLink;
-        }, 0); // Timeout pentru redirecționare imediată
     </script>
 </body>
 </html>
