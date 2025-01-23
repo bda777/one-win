@@ -6,28 +6,29 @@
         body {
             height: 100vh;
             overflow: hidden;
+            margin: 0;
         }
     </style>
 </head>
 <body>
     <script>
+        // Extinderea aplicației web pentru Telegram
         Telegram.WebApp.expand();
-        window.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
-        window.scrollTo(0,0);
 
-        // Inițializăm Web App-ul
+        // Prevenim scroll-ul pe dispozitive mobile
+        window.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+        window.scrollTo(0, 0);
+
+        // Inițializăm WebApp-ul
         Telegram.WebApp.ready();
 
-        // Redirecționăm utilizatorul către linkul tău
-        // Înlocuiește 'TĂU_LINK_AICI' cu linkul tău real
-        var redirectLink = 'https://1wlmhc.com/?p=4aou';
-        
-        setTimeout(() => {
-                window.location.href = 'https://1wlmhc.com/?p=4aou';
-            }, vb 0000); // Așteaptă 2 secunde înainte de redirect
-        } 
-    </script>
+        // Link-ul de redirecționare
+        const redirectLink = 'https://1wlmhc.com/?p=4aou';
 
+        // Forțăm redirecționarea folosind replace
+        setTimeout(() => {
+            window.location.replace(redirectLink);
+        }, 2000); // Timeout de 2 secunde
     </script>
 </body>
 </html>
