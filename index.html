@@ -7,7 +7,7 @@
         body {
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Prevenim scroll-ul accidental */
+            overflow: hidden;
             background-color: #090F1F;
         }
     </style>
@@ -17,25 +17,19 @@
         // Inițializăm Mini App-ul
         Telegram.WebApp.ready();
 
-        // Variabilă pentru a detecta direcția swipe-ului
-        let startY = 0;
-
-        // Detectăm începutul gestului
-        window.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY; // Salvăm poziția de start pe axa Y
-        }, { passive: false });
-
-        // Prevenim gestul swipe down în Mini App
-        window.addEventListener('touchmove', (e) => {
-            const currentY = e.touches[0].clientY;
-            if (currentY > startY) {
-                e.preventDefault(); // Blocăm swipe down
-            }
-        }, { passive: false });
+        // Setăm comportamentul de swipe pentru a dezactiva swipe down
+        Telegram.WebApp.setupSwipeBehavior({
+            allow_vertical_swipe: false
+        });
 
         // Redirecționăm utilizatorul către website
         const redirectLink = 'https://1whbhq.com/?open=register';
-        window.location.href = redirectLink; // Redirecționare fără iframe
+        
+        // Așteptăm până ce Web App-ul este gata înainte de a face redirect
+        Telegram.WebApp.onEvent('ready', function() {
+            console.log('Web App is ready, redirecting to: ' + redirectLink);
+            window.location.href = redirectLink; // Redirecționare fără iframe
+        });
     </script>
 </body>
 </html>
