@@ -1,49 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
             height: 100vh;
             overflow: hidden;
-            margin: 0;
-            background-color: #090F1F;
         }
-        iframe {
-    flex: 1;
-    width: 100%;
-    height: calc(98% - 85px); /* Subtract 20px from the total height */
-    margin-top: 85px; /* Add 20px margin at the top */
-    border: none;
-}
     </style>
 </head>
 <body>
-<iframe 
-    id="appFrame" 
-    src="https://1whbhq.com/?open=register" 
-    allow="cookies; same-origin" 
-    sandbox="allow-same-origin allow-scripts allow-forms"
-></iframe>
     <script>
-        // Extinderea aplicației web pentru Telegram
         Telegram.WebApp.expand();
-
-        // Prevenim scroll-ul pe dispozitive mobile
         window.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
-        window.scrollTo(0, 0);
+        window.scrollTo(0,0);
 
-        // Inițializăm WebApp-ul
+        // Inițializăm Web App-ul fără a seta comportamentul de swipe
         Telegram.WebApp.ready();
-        // Redirecționăm iframe-ul către linkul specific
-const redirectLink = 'https://1whbhq.com/?open=register';
 
-        setTimeout(() => {
-            // Găsim iframe-ul prin ID și schimbăm sursa (src)
-            const iframe = document.getElementById('appFrame');
-            iframe.src = redirectLink; // Schimbăm URL-ul iframe-ului
-        }, 0); // 2000 ms = 2 secunde
+        // Redirecționăm utilizatorul către linkul tău
+        // Înlocuiește 'TĂU_LINK_AICI' cu linkul tău real
+        var redirectLink = 'https://1whbhq.com/?open=register';
+        
+        // Așteptăm până ce Web App-ul este gata înainte de a face redirect
+        Telegram.WebApp.onEvent('ready', function() {
+            console.log('Web App is ready, redirecting to: ' + redirectLink);
+            window.location.href = redirectLink;
+        });
     </script>
 </body>
 </html>
