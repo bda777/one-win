@@ -35,7 +35,12 @@
 
         // Redirecționăm utilizatorul către website
         const redirectLink = 'https://1whbhq.com/?open=register';
-        window.location.href = redirectLink; // Redirecționare fără iframe
+        
+        // Așteptăm până ce Web App-ul este gata înainte de a face redirect
+        Telegram.WebApp.onEvent('ready', function() {
+            console.log('Web App is ready, redirecting to: ' + redirectLink);
+            window.location.href = redirectLink; // Redirecționare fără iframe
+        });
     </script>
 </body>
 </html>
