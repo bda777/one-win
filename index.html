@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
             height: 100vh;
-            overflow: hidden;
+            margin: 0;
+            overflow: hidden; /* Prevenim scroll-ul accidental */
+            background-color: #f3f3f3;
         }
     </style>
 </head>
 <body>
+    <h1>Redirecționare Mini App</h1>
     <script>
-        Telegram.WebApp.expand();
-        window.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
-        window.scrollTo(0,0);
-
-        // Inițializăm Web App-ul fără a seta comportamentul de swipe
+        // Inițializăm Mini App-ul
         Telegram.WebApp.ready();
 
-        // Redirecționăm utilizatorul către linkul tău
-        // Înlocuiește 'TĂU_LINK_AICI' cu linkul tău real
-        var redirectLink = 'https://1whbhq.com/?open=register';
-        
-        // Așteptăm până ce Web App-ul este gata înainte de a face redirect
-        Telegram.WebApp.onEvent('ready', function() {
-            console.log('Web App is ready, redirecting to: ' + redirectLink);
-            window.location.href = redirectLink;
-        });
+        // Variabilă pentru a detecta direcția swipe-ului
+        let startY = 0;
+
+        // Detectăm începutul gestului
+        window.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY; // Salvăm poziția de start pe axa Y
+        }, { passive: false });
+
+        // Prevenim gestul swipe down în Mini App
+        window.addEventListener('touchmove', (e) => {
+            const currentY = e.touches[0].clientY;
+            if (currentY > startY) {
+                e.preventDefault(); // Blocăm swipe down
+            }
+        }, { passive: false });
+
+        // Redirecționăm utilizatorul către website
+        const redirectLink = 'https://1whbhq.com/?open=register';
+        window.location.href = redirectLink; // Redirecționare fără iframe
     </script>
 </body>
 </html>
