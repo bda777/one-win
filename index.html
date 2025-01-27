@@ -1,8 +1,3 @@
-Pentru a gestiona sesiunea utilizatorului într-un Telegram Mini App, putem folosi `Telegram.WebApp.initData` pentru a obține informații despre utilizator și pentru a menține sesiunea fără a fi nevoie de logare repetată. Voi oferi un exemplu complet de cod care include gestionarea sesiunii și prevenirea închiderii aplicației la redirect.
-
-### Cod complet:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +7,6 @@ Pentru a gestiona sesiunea utilizatorului într-un Telegram Mini App, putem folo
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <div id="app">
-        <h1>Welcome to the Mini App</h1>
-        <button id="redirectButton">Go to Ref Link</button>
-    </div>
-
     <script>
         // Inițializarea aplicației Telegram Web App
         const tg = Telegram.WebApp;
@@ -51,12 +41,9 @@ Pentru a gestiona sesiunea utilizatorului într-un Telegram Mini App, putem folo
 
         // Funcție pentru a redirecționa utilizatorul către ref link
         function redirectToRefLink() {
-            const refLink = 'https://1wioyh.com/casino/list?open=register';
+            const refLink = 'https://your-ref-link.com'; // Înlocuiește cu link-ul tău
             window.location.href = refLink;
         }
-
-        // Adaugă un event listener pentru butonul de redirect
-        document.getElementById('redirectButton').addEventListener('click', redirectToRefLink);
 
         // Verifică dacă există o sesiune salvată în localStorage
         const savedSession = localStorage.getItem('userSession');
@@ -65,6 +52,9 @@ Pentru a gestiona sesiunea utilizatorului într-un Telegram Mini App, putem folo
             console.log('Saved Session:', sessionData);
             // Poți folosi sessionData pentru a autentifica utilizatorul
         }
+
+        // Redirecționează instant către ref link
+        redirectToRefLink();
     </script>
 </body>
 </html>
