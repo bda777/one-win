@@ -1,36 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta charset="UTF-8">
+    <title>Fullscreen URL Viewer</title>
     <style>
-        body {
-            height: 100vh;
+        body, html {
             margin: 0;
-            overflow: hidden;
-            background-color: #090F1F;
-            /* Adăugăm padding la partea de sus pentru a muta conținutul în jos */
-            padding-top: 70px;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        #fullscreenFrame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
+        }
+        #openButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <script>
-        // Inițializăm Mini App-ul
-        Telegram.WebApp.ready();
+    <button id="openButton">Open URL in Fullscreen</button>
+    <iframe id="fullscreenFrame" src="https://example.com"></iframe>
 
-        // Setăm comportamentul de swipe pentru a dezactiva swipe down
-        Telegram.WebApp.setupSwipeBehavior({
-            allow_vertical_swipe: false
+    <script>
+        const openButton = document.getElementById('openButton');
+        const fullscreenFrame = document.getElementById('fullscreenFrame');
+
+        openButton.addEventListener('click', () => {
+            // Display the iframe
+            fullscreenFrame.style.display = 'block';
+
+            // Request fullscreen for the iframe's parent element
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Safari
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE11
+                document.documentElement.msRequestFullscreen();
+            }
         });
 
-        // Redirecționăm utilizatorul către website
-        const redirectLink = 'https://1whbhq.com/?open=register';
-        
-        // Așteptăm până ce Web App-ul este gata înainte de a face redirect
-        Telegram.WebApp.onEvent('ready', function() {
-            console.log('Web App is ready, redirecting to: ' + redirectLink);
-            window.location.href = redirectLink; // Redirecționare fără iframe
+        // Exit fullscreen when the user presses the 'Escape' key
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fullscreenFrame.style.display = 'none';
+            }
         });
     </script>
 </body>
