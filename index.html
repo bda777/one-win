@@ -11,35 +11,65 @@
             background-color: #090F1F;
         }
         iframe {
-    flex: 1;
-    width: 100%;
-    height: calc(98% - 85px); /* Subtract 20px from the total height */
-    margin-top: 85px; /* Add 20px margin at the top */
-    border: none;
-}
+            flex: 1;
+            width: 100%;
+            height: calc(100% - 85px); /* Scădem 85px din înălțimea totală */
+            margin-top: 85px; /* Adăugăm un spațiu de 85px în partea de sus */
+            border: none;
+        }
     </style>
 </head>
 <body>
-    <iframe id="appFrame" src="about:blank"></iframe>
+    <iframe id="appFrame" src="https://1whbhq.com/?open=register"></iframe>
 
     <script>
         // Extinderea aplicației web pentru Telegram
-        Telegram.WebApp.expand();
+        Telegram.WebApp.ready(() => {
+            Telegram.WebApp.expand();
+
+            // Obține initData pentru gestionarea sesiunii
+            const initData = Telegram.WebApp.initData;
+
+            // Verifică dacă initData este disponibil
+            if (initData) {
+                // Parsează initData pentru a obține informații despre utilizator
+                const userData = parseInitData(initData);
+                console.log('User Data:', userData);
+
+                // Salvează informațiile despre sesiune în localStorage
+                localStorage.setItem('userSession', JSON.stringify(userData));
+            }
+
+            // Verifică dacă există o sesiune salvată în localStorage
+            const savedSession = localStorage.getItem('userSession');
+            if (savedSession) {
+                const sessionData = JSON.parse(savedSession);
+                console.log('Saved Session:', sessionData);
+                // Poți folosi sessionData pentru a autentifica utilizatorul
+            }
+        });
+
+        // Funcție pentru a parsa initData
+        function parseInitData(initData) {
+            const params = new URLSearchParams(initData);
+            const user = JSON.parse(params.get('user'));
+            return {
+                id: user.id,
+                firstName: user.first_name,
+                lastName: user.last_name,
+                username: user.username
+            };
+        }
 
         // Prevenim scroll-ul pe dispozitive mobile
-        window.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+        window.addEventListener('touchmove', (e) => {
+            if (e.target === document.body) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Asigurăm că pagina nu este derulată la încărcare
         window.scrollTo(0, 0);
-
-        // Inițializăm WebApp-ul
-        Telegram.WebApp.ready();
-        // Redirecționăm iframe-ul către linkul specific
-const redirectLink = 'https://1whbhq.com/?open=register';
-
-        setTimeout(() => {
-            // Găsim iframe-ul prin ID și schimbăm sursa (src)
-            const iframe = document.getElementById('appFrame');
-            iframe.src = redirectLink; // Schimbăm URL-ul iframe-ului
-        }, 0); // 2000 ms = 2 secunde
     </script>
 </body>
 </html>
