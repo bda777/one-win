@@ -1,59 +1,70 @@
+Pentru a gestiona sesiunea utilizatorului într-un Telegram Mini App, putem folosi `Telegram.WebApp.initData` pentru a obține informații despre utilizator și pentru a menține sesiunea fără a fi nevoie de logare repetată. Voi oferi un exemplu complet de cod care include gestionarea sesiunii și prevenirea închiderii aplicației la redirect.
+
+### Cod complet:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Fullscreen URL Viewer</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0;
-        }
-        #fullscreenFrame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: none;
-        }
-        #openButton {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <button id="openButton">Open URL in Fullscreen</button>
-    <iframe id="fullscreenFrame" src="https://example.com"></iframe>
+    <div id="app">
+        <h1>Welcome to the Mini App</h1>
+        <button id="redirectButton">Go to Ref Link</button>
+    </div>
 
     <script>
-        const openButton = document.getElementById('openButton');
-        const fullscreenFrame = document.getElementById('fullscreenFrame');
+        // Inițializarea aplicației Telegram Web App
+        const tg = Telegram.WebApp;
 
-        openButton.addEventListener('click', () => {
-            // Display the iframe
-            fullscreenFrame.style.display = 'block';
+        // Dezactivează swipe-down pentru a preveni închiderea aplicației
+        tg.disableSwipeDown();
 
-            // Request fullscreen for the iframe's parent element
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.webkitRequestFullscreen) { // Safari
-                document.documentElement.webkitRequestFullscreen();
-            } else if (document.documentElement.msRequestFullscreen) { // IE11
-                document.documentElement.msRequestFullscreen();
-            }
-        });
+        // Obține initData pentru gestionarea sesiunii
+        const initData = tg.initData;
 
-        // Exit fullscreen when the user presses the 'Escape' key
-        document.addEventListener('fullscreenchange', () => {
-            if (!document.fullscreenElement) {
-                fullscreenFrame.style.display = 'none';
-            }
-        });
+        // Verifică dacă initData este disponibil
+        if (initData) {
+            // Parsează initData pentru a obține informații despre utilizator
+            const userData = parseInitData(initData);
+            console.log('User Data:', userData);
+
+            // Salvează informațiile despre sesiune în localStorage
+            localStorage.setItem('userSession', JSON.stringify(userData));
+        }
+
+        // Funcție pentru a parsa initData
+        function parseInitData(initData) {
+            const params = new URLSearchParams(initData);
+            const user = JSON.parse(params.get('user'));
+            return {
+                id: user.id,
+                firstName: user.first_name,
+                lastName: user.last_name,
+                username: user.username
+            };
+        }
+
+        // Funcție pentru a redirecționa utilizatorul către ref link
+        function redirectToRefLink() {
+            const refLink = 'https://1wioyh.com/casino/list?open=register';
+            window.location.href = refLink;
+        }
+
+        // Adaugă un event listener pentru butonul de redirect
+        document.getElementById('redirectButton').addEventListener('click', redirectToRefLink);
+
+        // Verifică dacă există o sesiune salvată în localStorage
+        const savedSession = localStorage.getItem('userSession');
+        if (savedSession) {
+            const sessionData = JSON.parse(savedSession);
+            console.log('Saved Session:', sessionData);
+            // Poți folosi sessionData pentru a autentifica utilizatorul
+        }
     </script>
 </body>
 </html>
