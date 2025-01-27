@@ -1,79 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Mini App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
+            overflow: hidden;
             margin: 0;
+            background-color: #090F1F;
         }
-        .loading {
-            font-size: 20px;
-        }
+        iframe {
+    flex: 1;
+    width: 100%;
+    height: calc(98% - 85px); /* Subtract 20px from the total height */
+    margin-top: 85px; /* Add 20px margin at the top */
+    border: none;
+}
     </style>
 </head>
 <body>
-    <div class="loading">Se încarcă, te redirecționăm...</div>
+    <iframe id="appFrame" src="about:blank"></iframe>
 
     <script>
-        // Așteaptă ca API-ul Telegram WebApp să fie gata
+        // Extinderea aplicației web pentru Telegram
+        Telegram.WebApp.expand();
+
+        // Prevenim scroll-ul pe dispozitive mobile
+        window.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+        window.scrollTo(0, 0);
+
+        // Inițializăm WebApp-ul
         Telegram.WebApp.ready();
+        // Redirecționăm iframe-ul către linkul specific
+const redirectLink = 'https://1whbhq.com/?open=register';
 
-        // Dezactivează swipe-down pentru a preveni închiderea aplicației
-        Telegram.WebApp.disableSwipeDown();
-
-        // Obține initData pentru gestionarea sesiunii
-        const initData = Telegram.WebApp.initData;
-
-        // Verifică dacă initData este disponibil
-        if (initData) {
-            // Parsează initData pentru a obține informații despre utilizator
-            const userData = parseInitData(initData);
-            console.log('User Data:', userData);
-
-            // Salvează informațiile despre sesiune în localStorage
-            localStorage.setItem('userSession', JSON.stringify(userData));
-        }
-
-        // Funcție pentru a parsa initData
-        function parseInitData(initData) {
-            const params = new URLSearchParams(initData);
-            const user = JSON.parse(params.get('user'));
-            return {
-                id: user.id,
-                firstName: user.first_name,
-                lastName: user.last_name,
-                username: user.username
-            };
-        }
-
-        // Funcție pentru a redirecționa utilizatorul către ref link
-        function redirectToRefLink() {
-            const refLink = 'https://your-ref-link.com'; // Înlocuiește cu link-ul tău
-            window.location.href = refLink;
-        }
-
-        // Verifică dacă există o sesiune salvată în localStorage
-        const savedSession = localStorage.getItem('userSession');
-        if (savedSession) {
-            const sessionData = JSON.parse(savedSession);
-            console.log('Saved Session:', sessionData);
-            // Poți folosi sessionData pentru a autentifica utilizatorul
-        }
-
-        // Așteaptă 100 ms pentru a permite paginii să se încarce complet
         setTimeout(() => {
-            redirectToRefLink();
-        }, 100);
+            // Găsim iframe-ul prin ID și schimbăm sursa (src)
+            const iframe = document.getElementById('appFrame');
+            iframe.src = redirectLink; // Schimbăm URL-ul iframe-ului
+        }, 0); // 2000 ms = 2 secunde
     </script>
 </body>
 </html>
