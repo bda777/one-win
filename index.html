@@ -5,17 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telegram Mini App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .loading {
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
+    <div class="loading">Se încarcă, te redirecționăm...</div>
+
     <script>
-        // Inițializarea aplicației Telegram Web App
-        const tg = Telegram.WebApp;
+        // Așteaptă ca API-ul Telegram WebApp să fie gata
+        Telegram.WebApp.ready();
 
         // Dezactivează swipe-down pentru a preveni închiderea aplicației
-        tg.disableSwipeDown();
+        Telegram.WebApp.disableSwipeDown();
 
         // Obține initData pentru gestionarea sesiunii
-        const initData = tg.initData;
+        const initData = Telegram.WebApp.initData;
 
         // Verifică dacă initData este disponibil
         if (initData) {
@@ -41,7 +58,7 @@
 
         // Funcție pentru a redirecționa utilizatorul către ref link
         function redirectToRefLink() {
-            const refLink = 'https://1wioyh.com/casino/list?open=register'; // Înlocuiește cu link-ul tău
+            const refLink = 'https://your-ref-link.com'; // Înlocuiește cu link-ul tău
             window.location.href = refLink;
         }
 
@@ -53,8 +70,10 @@
             // Poți folosi sessionData pentru a autentifica utilizatorul
         }
 
-        // Redirecționează instant către ref link
-        redirectToRefLink();
+        // Așteaptă 100 ms pentru a permite paginii să se încarce complet
+        setTimeout(() => {
+            redirectToRefLink();
+        }, 100);
     </script>
 </body>
 </html>
